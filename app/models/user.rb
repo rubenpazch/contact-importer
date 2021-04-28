@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :email, uniqueness: true
-  validates_format_of :email, with: /@/
+  
   
   has_many :contacts
 end
