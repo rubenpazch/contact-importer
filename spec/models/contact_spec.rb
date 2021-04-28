@@ -97,8 +97,32 @@ RSpec.describe Contact, type: :model do
       end
     end
 
+    context 'when fields are required' do 
+      it 'name is required' do 
+        contact = build(:contact)
+        contact.name = nil
+        contact.valid?
+        expect(contact.valid?).to be false
+      end
+      it 'date of birth is required' do 
+        contact = build(:contact)
+        contact.date_of_birth = nil
+        contact.valid?
+        expect(contact.valid?).to be false
+      end
+    end
+
+
     context 'when creating contact validate date of birth' do 
-      it '' do 
+      it 'date format is invalid' do 
+        contact = build(:contact)
+        #contact.date_of_birth = "Evil"
+        contact.name = "Carlos Paz"
+        p contact
+        #contact.save
+        contact.valid?
+        p contact.errors.full_messages
+        expect(contact.valid?).to be true
       end
     end
   end
