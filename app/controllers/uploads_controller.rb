@@ -29,7 +29,7 @@ class UploadsController < ApplicationController
     error_counter = 0
     current_upload = current_user.uploads.last
 
-    current_user.temp_datum.all.each do |item|
+    current_user.temp_datum.show_inactive.each do |item|
         new_contact= Contact.new(
           name: item[ hash.key('name').to_s ],
           date_of_birth: "2020/02/19",
@@ -91,6 +91,61 @@ class UploadsController < ApplicationController
           row: current_row,
           column: "date_of_birth",
           data: "date_of_birth #{msg}"
+        )
+        upload.upload_details << (upd) if upd.valid?
+      end
+    end
+
+    unless contact.errors[:phone].empty?
+      contact.errors[:phone].each do |msg|
+        upd = UploadDetail.new(
+          row: current_row,
+          column: "phone",
+          data: "phone #{msg}"
+        )
+        upload.upload_details << (upd) if upd.valid?
+      end
+    end
+
+    unless contact.errors[:address].empty?
+      contact.errors[:address].each do |msg|
+        upd = UploadDetail.new(
+          row: current_row,
+          column: "address",
+          data: "address #{msg}"
+        )
+        upload.upload_details << (upd) if upd.valid?
+      end
+    end
+
+    unless contact.errors[:credit_card].empty?
+      contact.errors[:credit_card].each do |msg|
+        upd = UploadDetail.new(
+          row: current_row,
+          column: "credit_card",
+          data: "credit_card #{msg}"
+        )
+        upload.upload_details << (upd) if upd.valid?
+      end
+    end
+
+    unless contact.errors[:franchise].empty?
+      contact.errors[:franchise].each do |msg|
+        upd = UploadDetail.new(
+          row: current_row,
+          column: "franchise",
+          data: "franchise #{msg}"
+        )
+        upload.upload_details << (upd) if upd.valid?
+      end
+    end
+
+    unless contact.errors[:email].empty?
+      contact.errors[:email].each do |msg|
+        upd = UploadDetail.new(
+          row: current_row,
+          column: "email",
+          data: "email #{msg}"
         )
         upload.upload_details << (upd) if upd.valid?
       end
