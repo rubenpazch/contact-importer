@@ -1,10 +1,11 @@
 class UploadsController < ApplicationController
   before_action :authenticate_user!
   def index 
+    @data = Data.new.getData
   end
 
-  def import 
-    Upload.import(params[:file])
-    redirect_to root_url, notice: "Activity data imported!"
+  def import         
+    @data = Upload.import(params[:file])
+    redirect_to uploads_path, notice: "Activity data imported!"
   end
 end
