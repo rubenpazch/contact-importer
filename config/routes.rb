@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     collection { post :save}
     collection { post :clean}
     collection { get :imported_files}
+    collection { get :contacts_list}    
   end
 end

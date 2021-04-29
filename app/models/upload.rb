@@ -15,7 +15,8 @@ class Upload < ApplicationRecord
         column5: row[4],
         column6: row[5],
         column7: "",
-        column8: ""
+        column8: "",
+        show: false
       )
       current_user.temp_datum << temp_datum
       total_items += 1

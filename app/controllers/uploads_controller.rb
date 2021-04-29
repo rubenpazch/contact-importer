@@ -1,7 +1,7 @@
 class UploadsController < ApplicationController
   before_action :authenticate_user!
   def index 
-    @temp_data = current_user.temp_datum.all    
+    @temp_data = current_user.temp_datum.show_inactive    
   end
 
   def import         
@@ -16,6 +16,10 @@ class UploadsController < ApplicationController
 
   def imported_files
     @uploads = current_user.uploads
+  end
+
+  def contacts_list
+    @contacts = current_user.contacts
   end
 
   def save
@@ -38,7 +42,11 @@ class UploadsController < ApplicationController
         new_contact.valid?    
         error_counter += new_contact.errors.size
         save_errors(current_upload, new_contact, current_row)        
-        current_user.contacts << (new_contact) if new_contact.valid?
+        current_user.contacts << (new_contact) #if new_contact.valid?
+        
+        item["show"] = true #if new_contact.valid?
+        item.save
+        
         current_row += 1
     end
     setStatus(current_upload, error_counter)
