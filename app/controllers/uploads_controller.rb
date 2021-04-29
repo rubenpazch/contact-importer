@@ -17,18 +17,45 @@ class UploadsController < ApplicationController
   def save
     selected_options = params[:options]
     hash = convert_to_hash(selected_options)
+    current_row = 1
+    current_upload = current_user.uploads.last
 
     current_user.temp_datum.all.each do |item|
         new_contact= Contact.new(
-          name: item["column1"], ##'pedro',#item[selected_options.key?('name')],
+          name: item[ hash.key('name').to_s ],
           date_of_birth: "2020/02/19",
-          phone: selected_options["column1"],
-          address: hash.key('Address'),
-          credit_card: '34534534534',
+          phone: item[ hash.key('phone').to_s ],
+          address: item[ hash.key('address').to_s ],
+          credit_card: item[  hash.key('credit_card').to_s  ],
           franchise: 'SDFD',
-          email: 'RUBEN@OUTLOOKC.OM',
+          email: item[  hash.key('email').to_s  ],
         )
-        current_user.contacts<<(new_contact)
+        new_contact.valid?
+        
+        unless new_contact.errors[:name].empty?
+          new_contact.errors[:name].each do |msg|
+            upd = UploadDetail.new(
+              row: current_row,
+              column: "name",
+              data: "name #{msg}"
+            )
+            current_upload.upload_details << (upd)
+          end
+        end
+
+        unless new_contact.errors[:date_of_birth].empty?
+          new_contact.errors[:date_of_birth].each do |msg|
+            upd = UploadDetail.new(
+              row: current_row,
+              column: "date_of_birth",
+              data: "date_of_birth #{msg}"
+            )
+            current_upload.upload_details << (upd)
+          end
+        end
+        
+        current_user.contacts << (new_contact)
+        current_row += 1
     end
     
     

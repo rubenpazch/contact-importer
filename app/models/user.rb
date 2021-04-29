@@ -9,4 +9,5 @@ class User < ApplicationRecord
   
   has_many :contacts
   has_many :temp_datum
+  has_many :uploads
 end
