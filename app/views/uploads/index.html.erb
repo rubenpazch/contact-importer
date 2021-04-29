@@ -1,0 +1,76 @@
+<br>
+
+<h1>upload a file</h1>
+
+
+<hr/>
+
+<h2> Import a File </h2>
+
+<%= form_tag import_uploads_path, multipart: true do %>
+  <%= file_field_tag :file %>  
+  <%= submit_tag "Import CSV" %>
+<% end %>
+<br/>
+<%= form_tag clean_uploads_path do %>  
+  <%= submit_tag "Clear" %>
+<% end %>
+<br/>
+<br/>
+
+<%= form_tag save_uploads_path  do %>
+  <%= submit_tag "Save Data" %>
+  <br/>
+  <br/>
+<table>
+  <thead>
+    <tr>
+      <th>Item1</th>
+      <th>Item2</th>
+      <th>Item3</th>
+      <th>Item4</th>
+      <th>Item5</th>
+      <th>Item6</th>
+      <th>Item7</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>
+      <%= select_tag "options[column1]", raw("<option value='name'>Name</option><option value='date_of_birth'>Date of Birth</option><option value='phone'>Phone</option><option value='address'>Address</option><option value='credit_card'>Credit Card</option><option value='email'>Email</option>"), multiple: false %>
+    </td>
+    <td>
+      <%= select_tag "options[column2]", raw("<option value='name'>Name</option><option value='date_of_birth'>Date of Birth</option><option value='phone'>Phone</option><option value='address'>Address</option><option value='credit_card'>Credit Card</option><option value='email'>Email</option>"), multiple: false %>
+    </td>
+    <td>
+      <%= select_tag "options[column3]", raw("<option value='name'>Name</option><option value='date_of_birth'>Date of Birth</option><option value='phone'>Phone</option><option value='address'>Address</option><option value='credit_card'>Credit Card</option><option value='email'>Email</option>"), multiple: false %>
+    </td>
+    <td>
+      <%= select_tag "options[column4]", raw("<option value='name'>Name</option><option value='date_of_birth'>Date of Birth</option><option value='phone'>Phone</option><option value='address'>Address</option><option value='credit_card'>Credit Card</option><option value='email'>Email</option>"), multiple: false %>
+    </td>
+    <td>
+      <%= select_tag "options[column5]", raw("<option value='name'>Name</option><option value='date_of_birth'>Date of Birth</option><option value='phone'>Phone</option><option value='address'>Address</option><option value='credit_card'>Credit Card</option><option value='email'>Email</option>"), multiple: false %>
+    </td>
+    <td>
+      <%= select_tag "options[column6]", raw("<option value='name'>Name</option><option value='date_of_birth'>Date of Birth</option><option value='phone'>Phone</option><option value='address'>Address</option><option value='credit_card'>Credit Card</option><option value='email'>Email</option>"), multiple: false %>
+    </td>
+    <td>
+      <%= select_tag "options[column7]", raw("<option value='name'>Name</option><option value='date_of_birth'>Date of Birth</option><option value='phone'>Phone</option><option value='address'>Address</option><option value='credit_card'>Credit Card</option><option value='email'>Email</option>"), multiple: false %>
+    </td>
+  </tr>
+    <% @temp_data.each do |data| %>
+      <tr>
+        <td><%= data.column1 %></td>
+        <td><%= data.column2 %></td>
+        <td><%= data.column3 %></td>
+        <td><%= data.column4 %></td>
+        <td><%= data.column5 %></td>
+        <td><%= data.column6 %></td>
+        <td><%= data.column7 %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
