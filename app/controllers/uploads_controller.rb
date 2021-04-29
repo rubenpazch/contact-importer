@@ -14,6 +14,10 @@ class UploadsController < ApplicationController
     redirect_to uploads_path, notice: "The information was cleaned!"  
   end
 
+  def imported_files
+    @uploads = current_user.uploads
+  end
+
   def save
     selected_options = params[:options]
     hash = convert_to_hash(selected_options)
@@ -39,7 +43,7 @@ class UploadsController < ApplicationController
               column: "name",
               data: "name #{msg}"
             )
-            current_upload.upload_details << (upd)
+            current_upload.upload_details << (upd) if upd.valid?
           end
         end
 
@@ -50,7 +54,7 @@ class UploadsController < ApplicationController
               column: "date_of_birth",
               data: "date_of_birth #{msg}"
             )
-            current_upload.upload_details << (upd)
+            current_upload.upload_details << (upd) if upd.valid?
           end
         end
         
@@ -59,7 +63,7 @@ class UploadsController < ApplicationController
     end
     
     
-    redirect_to uploads_path, notice: "The information was saved!"  
+    redirect_to imported_files_uploads_path, notice: "The information was saved!"  
   end
 
   private

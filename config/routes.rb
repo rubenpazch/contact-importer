@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     collection { post :import}
     collection { post :save}
     collection { post :clean}
+    collection { get :imported_files}
   end
 end
