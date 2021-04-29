@@ -56,7 +56,7 @@ RSpec.describe Contact, type: :model do
 
       it 'name with symbol \ is invalid' do
         contact = build(:contact)        
-        contact.name = "Carlos\ Paz"
+        contact.name = "Carlos\\paz"
         expect(contact.valid?).to be false
       end
 

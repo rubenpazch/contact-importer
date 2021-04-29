@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   #post "/upload", to: "uploads#import"
   resources :uploads do 
     collection { post :import}
+    collection { post :save}
+    collection { post :clean}
   end
 end
