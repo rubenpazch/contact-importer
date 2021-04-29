@@ -76,6 +76,10 @@ To watch the local version of this project check on your browser for the link
 Listening on tcp://127.0.0.1:3000
 ```
 
+### Examples CSV are here
+
+examples file to test the are located in /examples folder inside of the applications
+
 ### Run tests
 
 Run the test suite to verify that everything is working correctly:
