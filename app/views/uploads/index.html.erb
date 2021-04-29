@@ -8,3 +8,33 @@
 <hr/>
 
 <h2> Import a File </h2>
+
+<%= form_tag import_uploads_path, multipart: true do %>
+  <%= file_field_tag :file %>  
+  <%= submit_tag "Import CSV" %>
+<% end %>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Item1</th>
+      <th>Item2</th>
+      <th>Item3</th>
+      <th>Item4</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <% @data.each do |contact| %>
+      <tr>
+        <td><%= contact[0] %></td>
+        <td><%= contact[1] %></td>
+        <td><%= contact[2] %></td>
+        <td><%= contact[3] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
